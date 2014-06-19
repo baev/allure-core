@@ -11,22 +11,28 @@
         <xsl:element name="alr:allure-test-run">
             <xsl:call-template name="add-time-node-for-test-run"/>
 
-            <xsl:apply-templates select="@*|node()"/>
+            <xsl:element name="test-suites">
+                <xsl:for-each-group select="test-suites/test-suite" group-by="name">
+                    <xsl:element name="test-suite">
+                        <xsl:call-template name="add-uid-node">
+                            <xsl:with-param name="name" select="name/text()"/>
+                        </xsl:call-template>
+                        <xsl:call-template name="add-title-node"/>
+                        <xsl:call-template name="add-time-node"/>
+                        <xsl:call-template name="add-statistic-node"/>
+                        <xsl:call-template name="add-testcases-for-current-group"/>
+
+                        <xsl:apply-templates select="@*|node()"/>
+                    </xsl:element>
+                </xsl:for-each-group>
+            </xsl:element>
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="test-suite">
-        <xsl:element name="test-suite">
-            <xsl:call-template name="add-uid-node">
-                <xsl:with-param name="name" select="name/text()"/>
-            </xsl:call-template>
-            <xsl:call-template name="add-title-node"/>
-            <xsl:call-template name="add-time-node"/>
-            <xsl:call-template name="add-statistic-node"/>
 
-            <xsl:apply-templates select="@*|node()"/>
-        </xsl:element>
+    <xsl:template match="test-cases">
     </xsl:template>
+
 
     <xsl:template match="test-case">
         <xsl:element name="test-case">
@@ -183,6 +189,14 @@
                 <xsl:value-of select="utils:humanize(name/text())"/>
             </xsl:element>
         </xsl:if>
+    </xsl:template>
+
+    <xsl:template name="add-testcases-for-current-group">
+        <xsl:element name="test-cases">
+            <xsl:for-each select="current-group()/test-cases">
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:for-each>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="@start | @stop | @status | @severity">
