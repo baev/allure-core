@@ -30,8 +30,20 @@ describe('Allure directive', function () {
             createElement('<div text-cut="text"></div>', {});
             expect(getBeginning().text()).toBe('');
         });
+
+        it('should escape text by default', function() {
+            createElement('<div text-cut="text"></div>', {text: '<br/>\n<div/>'});
+            expect(getBeginning().html()).toBe('&lt;br/&gt;');
+            expect(getEnding().html()).toBe('&lt;div/&gt;');
+        });
+
+        //it('should not escape text when specified', function() {
+        //    createElement('<div text-cut="text" escapeHtml="false"></div>', {text: '<br/>'});
+        //    expect(getBeginning().html()).toBe('???');
+        //});
+
         it('should split text and hide ending', function() {
-            createElement('<div text-cut="text"></div>', {text: 'line\n\n2nd line'});
+            createElement('<div text-cut="text"></div>', {text: 'line\n2nd line'});
             expect(getToggleButton()).not.toHaveClass('ng-hide');
             expect(getEnding()).toHaveClass('ng-hide');
         });
@@ -43,12 +55,14 @@ describe('Allure directive', function () {
         });
 
         it('should toggle all text by button', function() {
-            createElement('<div text-cut="text"></div>', {text: 'line\n\n2nd line'});
+            createElement('<div text-cut="text"></div>', {text: 'line\n2nd line'});
             getToggleButton().click();
             expect(getEnding()).not.toHaveClass('ng-hide');
             getToggleButton().click();
             expect(getEnding()).toHaveClass('ng-hide');
         });
+
+
     });
 
     describe('onKeynav', function() {
