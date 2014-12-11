@@ -44,11 +44,11 @@ angular.module('allure.directives', [])
             restrict: 'A',
             replace: 'true',
             template: '<div ng-switch="escapeHtml">' +
-                '<span ng-bind="beginning" ng-switch-default></span> ' +
-                '<span ng-bind="ending" ng-show="show" ng-switch-default></span> ' +
+                '<span class="text-cut-beginning" ng-bind="beginning" ng-switch-default></span> ' +
+                '<span class="text-cut-ending" ng-bind="ending" ng-show="show" ng-switch-default></span> ' +
 
-                '<span ng-bind-html="beginning | trustAsHtml" ng-switch-when="false"></span> ' +
-                '<span ng-bind-html="ending | trustAsHtml" ng-show="show" ng-switch-when="false"></span> ' +
+                '<span class="text-cut-beginning" ng-bind-html="beginning | trustAsHtml" ng-switch-when="false"></span> ' +
+                '<span class="text-cut-ending" ng-bind-html="ending | trustAsHtml" ng-show="show" ng-switch-when="false"></span> ' +
 
                 '<span class="text-right">' +
                 '<span ng-click="toggleShow(!show)" ng-show="ending" class="pull-right expand-btn btn-link clickable" ng-bind="showText"></span>' +

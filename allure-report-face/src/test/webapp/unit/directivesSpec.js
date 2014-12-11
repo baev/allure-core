@@ -15,16 +15,17 @@ describe('Allure directive', function () {
     }
 
     beforeEach(module('allure.directives'));
+    beforeEach(module('allure.filters'));
 
     describe('textCut', function() {
         function getBeginning() {
-            return elem.find('[ng-bind="beginning"]');
+            return elem.find('.text-cut-beginning');
         }
         function getToggleButton() {
             return elem.find('[ng-bind="showText"]');
         }
         function getEnding() {
-            return elem.find('[ng-bind="ending"]');
+            return elem.find('.text-cut-ending');
         }
         it('should convert undefined to empty string', function() {
             createElement('<div text-cut="text"></div>', {});
@@ -37,10 +38,10 @@ describe('Allure directive', function () {
             expect(getEnding().html()).toBe('&lt;div/&gt;');
         });
 
-        //it('should not escape text when specified', function() {
-        //    createElement('<div text-cut="text" escapeHtml="false"></div>', {text: '<br/>'});
-        //    expect(getBeginning().html()).toBe('???');
-        //});
+        it('should not escape text when specified', function() {
+            createElement('<div text-cut="text" escape-html="false"></div>', {text: '<br>'});
+            expect(getBeginning().html()).toBe('<br>');
+        });
 
         it('should split text and hide ending', function() {
             createElement('<div text-cut="text"></div>', {text: 'line\n2nd line'});
