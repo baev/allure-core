@@ -111,7 +111,7 @@ class PluginManager {
      */
     void writePluginWidgets(ReportWriter writer) {
         def widgets = widgets
-        def widgetNames = widgets.collect { it.name }.sort().join("")
+        def widgetNames = widgets*.name.sort().join("")
         def hash = Hashing.sha1().hashString(widgetNames, StandardCharsets.UTF_8).toString()
         writer.write(new PluginData(WIDGETS_JSON, new Widgets(hash: hash, data: widgets)))
     }
