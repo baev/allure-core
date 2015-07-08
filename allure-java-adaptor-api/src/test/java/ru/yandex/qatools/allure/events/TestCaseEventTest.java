@@ -30,7 +30,6 @@ public class TestCaseEventTest {
     public void testCaseStartedEvent() throws Exception {
         new TestCaseStartedEvent("suite.uid", "name").process(testCase);
         verify(testCase).setName("name");
-        verify(testCase).setTitle(null);
         verify(testCase).setDescription(null);
         verify(testCase).setLabels(Collections.<Label>emptyList());
         verify(testCase).setStart(anyLong());
@@ -40,9 +39,8 @@ public class TestCaseEventTest {
 
     @Test
     public void testCaseStartedEventTitle() throws Exception {
-        new TestCaseStartedEvent("suite.uid", "name").withTitle("some.title").process(testCase);
+        new TestCaseStartedEvent("suite.uid", "name").process(testCase);
         verify(testCase).setName("name");
-        verify(testCase).setTitle("some.title");
         verify(testCase).setDescription(null);
         verify(testCase).setLabels(Collections.<Label>emptyList());
         verify(testCase).setStart(anyLong());
@@ -58,7 +56,6 @@ public class TestCaseEventTest {
 
         new TestCaseStartedEvent("suite.uid", "name").withDescription(description).process(testCase);
         verify(testCase).setName("name");
-        verify(testCase).setTitle(null);
         verify(testCase).setDescription(description);
         verify(testCase).setLabels(Collections.<Label>emptyList());
         verify(testCase).setStart(anyLong());
@@ -71,7 +68,6 @@ public class TestCaseEventTest {
         Label label = new Label().withName("label.name").withValue("label.value");
         new TestCaseStartedEvent("suite.uid", "name").withLabels(label).process(testCase);
         verify(testCase).setName("name");
-        verify(testCase).setTitle(null);
         verify(testCase).setDescription(null);
         verify(testCase).setLabels(Arrays.asList(label));
         verify(testCase).setStart(anyLong());

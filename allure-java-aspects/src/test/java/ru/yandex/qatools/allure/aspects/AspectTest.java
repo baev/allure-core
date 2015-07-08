@@ -51,7 +51,7 @@ public class AspectTest {
         } catch (Exception ignored) {
         }
         InOrder inOrder = inOrder(allure);
-        inOrder.verify(allure).fire(eq(new StepStartedEvent("failedStep[java.lang.Exception: something]")));
+        inOrder.verify(allure).fire(eq(new StepStartedEvent("failedStep")));
         inOrder.verify(allure).fire(eq(new StepFailureEvent().withThrowable(exception)));
         inOrder.verify(allure).fire(eq(new StepFinishedEvent()));
         inOrder.verifyNoMoreInteractions();
@@ -61,7 +61,7 @@ public class AspectTest {
     public void stepWithTitleTest() throws Exception {
         steps.stepWithTitle();
         InOrder inOrder = inOrder(allure);
-        inOrder.verify(allure).fire(eq(new StepStartedEvent("stepWithTitle").withTitle("Tata title")));
+        inOrder.verify(allure).fire(eq(new StepStartedEvent("Tata title")));
         inOrder.verify(allure).fire(eq(new StepFinishedEvent()));
         inOrder.verifyNoMoreInteractions();
     }

@@ -51,7 +51,7 @@ public class AllureListenerTimeoutTest extends BasicListenerTest {
                         "Result should contains title '%s'",
                         TestWithTimeoutAnnotation.NAME
                 ),
-                result.getTestCases().iterator().next().getTitle(),
+                result.getTestCases().iterator().next().getName(),
                 is(TestWithTimeoutAnnotation.NAME)
         );
     }

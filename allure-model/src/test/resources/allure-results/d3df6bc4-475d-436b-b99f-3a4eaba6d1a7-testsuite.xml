@@ -3,8 +3,7 @@
     <name>my.company.AllureMigrationTest</name>
     <test-cases>
         <test-case start="1412949539363" stop="141294999358" status="skipped" severity="normal">
-            <name>AllureOldDataTest</name>
-            <title>Test what do nothing and always passed right, but have a very long title, over 100 symbols, seriously</title>
+            <name>Test what do nothing and always passed right, but have a very long title, over 100 symbols, seriously</name>
             <description type="text">I hate descriptions! See the title!</description>
             <steps/>
             <attachments/>

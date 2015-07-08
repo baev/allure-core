@@ -41,6 +41,7 @@ class XUnitPlugin extends DefaultTabPlugin implements WithWidget {
 
             suite.uid = generateUid()
             suite.name = suiteName
+            suite.title = suiteName
             suite.statistic = new Statistic()
             suite.time = new Time(start: Long.MAX_VALUE, stop: Long.MIN_VALUE)
             testSuites[suiteName] = suite

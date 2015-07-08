@@ -2,8 +2,6 @@ package ru.yandex.qatools.allure.junit.testdata;
 
 import org.junit.Test;
 import ru.yandex.qatools.allure.Allure;
-import ru.yandex.qatools.allure.events.TestCaseEvent;
-import ru.yandex.qatools.allure.model.Label;
 import ru.yandex.qatools.allure.model.TestCaseResult;
 
 /**
@@ -12,15 +10,12 @@ import ru.yandex.qatools.allure.model.TestCaseResult;
  */
 public class TestWithTimeoutAnnotation {
 
-    public static final String NAME = "TestWithTimeoutRule#title";
+    public static final String NAME = "TestWithTimeoutRule#name";
 
     @Test(timeout = 10000)
     public void someTest() throws Exception {
-        Allure.LIFECYCLE.fire(new TestCaseEvent() {
-            @Override
-            public void process(TestCaseResult context) {
-                context.setTitle(NAME);
-            }
+        Allure.LIFECYCLE.fire((TestCaseResult context) -> {
+            context.setName(NAME);
         });
     }
 }

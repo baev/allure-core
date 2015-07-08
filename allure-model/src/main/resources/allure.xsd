@@ -13,7 +13,6 @@
     <xs:complexType name="test-suite-result">
         <xs:all>
             <xs:element name="name" type="xs:string"/>
-            <xs:element name="title" type="xs:string" minOccurs="0"/>
             <xs:element name="description" type="qa:description" minOccurs="0"/>
             <xs:element name="test-cases" type="qa:test-cases-result" minOccurs="0"/>
             <xs:element name="labels" type="qa:labels" minOccurs="0"/>
@@ -32,7 +31,6 @@
     <xs:complexType name="test-case-result">
         <xs:all>
             <xs:element name="name" type="xs:string"/>
-            <xs:element name="title" type="xs:string" minOccurs="0"/>
             <xs:element name="description" type="qa:description" minOccurs="0"/>
             <xs:element name="failure" type="qa:failure" minOccurs="0"/>
             <xs:element name="steps" type="qa:steps" minOccurs="0"/>
@@ -59,7 +57,6 @@
     <xs:complexType name="step">
         <xs:all>
             <xs:element name="name" type="xs:string"/>
-            <xs:element name="title" type="xs:string" minOccurs="0"/>
             <xs:element name="attachments" type="qa:attachments" minOccurs="0"/>
             <xs:element name="steps" type="qa:steps" minOccurs="0"/>
         </xs:all>

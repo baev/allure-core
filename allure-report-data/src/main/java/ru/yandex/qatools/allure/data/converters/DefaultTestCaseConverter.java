@@ -55,7 +55,6 @@ public class DefaultTestCaseConverter implements TestCaseConverter {
 
             result.setUid(generateUid());
             result.setName(Optional.ofNullable(source.getName()).orElse(UNKNOWN_TEST_CASE));
-            result.setTitle(Optional.ofNullable(result.getTitle()).orElse(TextUtils.humanize(result.getName())));
 
             if (result.getDescription() != null && MARKDOWN.equals(result.getDescription().getType())) {
                 result.getDescription().setValue(TextUtils.processMarkdown(result.getDescription().getValue()));
@@ -80,7 +79,6 @@ public class DefaultTestCaseConverter implements TestCaseConverter {
             Step source = context.getSource();
 
             result.setName(Optional.ofNullable(source.getName()).orElse(UNKNOWN_STEP_NAME));
-            result.setTitle(Optional.ofNullable(result.getTitle()).orElse(TextUtils.humanize(result.getName())));
 
             result.setTime(source.getTime());
             result.setSummary(source.getSummary());

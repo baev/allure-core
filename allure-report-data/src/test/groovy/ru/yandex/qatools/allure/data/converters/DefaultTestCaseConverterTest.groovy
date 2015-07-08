@@ -5,7 +5,6 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
-import ru.yandex.qatools.allure.data.utils.TextUtils
 import ru.yandex.qatools.allure.model.Attachment
 import ru.yandex.qatools.allure.model.Description
 import ru.yandex.qatools.allure.model.DescriptionType
@@ -48,7 +47,6 @@ class DefaultTestCaseConverterTest {
         def modify = converter.convert(origin)
         assert modify
         assert modify.name == "name"
-        assert modify.title == "Name"
 
         assert !modify.description
         assert !modify.failure
@@ -90,39 +88,6 @@ class DefaultTestCaseConverterTest {
         use(DefaultTestCaseConverterTest) {
             modify.labels.checkLabel(LabelName.SEVERITY, CRITICAL.value())
         }
-    }
-
-    @Ignore("The titles sucks")
-    @Test
-    void shouldHumanizeSuiteName() {
-        def origin = new TestCaseResult(
-                name: "name",
-                labels: [createLabel(LabelName.SUITE, "suiteName")]
-        )
-        def modify = converter.convert(origin)
-
-        assert modify.suite.name == "suiteName"
-        assert modify.suite.title == "Suite name"
-    }
-
-    @Ignore("We should move grouping logic to xUnit plugin")
-    @Test
-    void shouldGroupSuitesByName() {
-        def firstOrigin = new TestCaseResult(
-                name: "firstName",
-                labels: [createLabel(LabelName.SUITE, "name")]
-        )
-
-        def secondOrigin = new TestCaseResult(
-                name: "secondName",
-                labels: [createLabel(LabelName.SUITE, "name")]
-        )
-        def firstModify = converter.convert(firstOrigin)
-        def secondModify = converter.convert(secondOrigin)
-
-        assert firstModify.suite.name == "name"
-        assert secondModify.suite.name == "name"
-        assert secondModify.suite.uid == firstModify.suite.uid
     }
 
     @Test
@@ -279,7 +244,6 @@ class DefaultTestCaseConverterTest {
 
         assert modify.steps
         assert modify.steps.size() == 1
-        assert modify.steps[0].title == "Step name"
     }
 
     @Test
@@ -347,21 +311,6 @@ class DefaultTestCaseConverterTest {
 
         assert modify.name
         assert modify.name == UNKNOWN_TEST_CASE
-
-        assert modify.title
-        assert modify.title == TextUtils.humanize(UNKNOWN_TEST_CASE)
-    }
-
-    @Test
-    void shouldConvertTestCaseWithoutName() {
-        def origin = new TestCaseResult(title: "some title")
-        def modify = converter.convert(origin)
-
-        assert modify.name
-        assert modify.name == UNKNOWN_TEST_CASE
-
-        assert modify.title
-        assert modify.title == "some title"
     }
 
     @Test
@@ -371,9 +320,6 @@ class DefaultTestCaseConverterTest {
 
         assert modify.name
         assert modify.name == "someName"
-
-        assert modify.title
-        assert modify.title == "Some name"
     }
 
     @Test
@@ -388,24 +334,6 @@ class DefaultTestCaseConverterTest {
         assert modify.steps.size() == 1
         assert modify.steps[0].name
         assert modify.steps[0].name == UNKNOWN_STEP_NAME
-        assert modify.steps[0].title
-        assert modify.steps[0].title == TextUtils.humanize(UNKNOWN_STEP_NAME)
-    }
-
-    @Test
-    void shouldConvertStepWithoutName() {
-        def origin = new TestCaseResult(
-                name: "name",
-                steps: [new Step(title: "some title")]
-        )
-        def modify = converter.convert(origin)
-
-        assert modify.steps
-        assert modify.steps.size() == 1
-        assert modify.steps[0].name
-        assert modify.steps[0].name == UNKNOWN_STEP_NAME
-        assert modify.steps[0].title
-        assert modify.steps[0].title == "some title"
     }
 
     @Test
@@ -420,8 +348,6 @@ class DefaultTestCaseConverterTest {
         assert modify.steps.size() == 1
         assert modify.steps[0].name
         assert modify.steps[0].name == "someName"
-        assert modify.steps[0].title
-        assert modify.steps[0].title == "Some name"
     }
 
     @Test

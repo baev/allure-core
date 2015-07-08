@@ -36,8 +36,8 @@ public class WriteTestSuiteResultTest {
         TestSuiteResult testSuiteResult = new TestSuiteResult()
                 .withName("somename");
 
-        String titleWithInvalidXmlCharacter = String.valueOf(Character.toChars(0x0));
-        testSuiteResult.setTitle(titleWithInvalidXmlCharacter);
+        String stringWithInvalidXmlCharacter = String.valueOf(Character.toChars(0x0));
+        testSuiteResult.setName(stringWithInvalidXmlCharacter);
 
         AllureResultsUtils.writeTestSuiteResult(testSuiteResult);
 

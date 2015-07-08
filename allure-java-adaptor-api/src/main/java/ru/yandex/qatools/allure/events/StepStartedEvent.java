@@ -33,17 +33,5 @@ public class StepStartedEvent extends AbstractStepStartedEvent {
         step.setName(getName());
         step.setStatus(Status.PASSED);
         step.setStart(System.currentTimeMillis());
-        step.setTitle(getTitle());
-    }
-
-    /**
-     * Sets title using fluent-api
-     *
-     * @param title value to set
-     * @return modified instance
-     */
-    public StepStartedEvent withTitle(String title) {
-        setTitle(title);
-        return this;
     }
 }

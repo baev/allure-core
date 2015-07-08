@@ -51,7 +51,6 @@ public class AllureShutdownHook implements Runnable {
     public TestCaseResult createFakeTestcaseWithWarning(TestSuiteResult testSuite) {
         return new TestCaseResult()
                 .withName(testSuite.getName())
-                .withTitle(testSuite.getName())
                 .withStart(testSuite.getStart())
                 .withStop(System.currentTimeMillis())
                 .withFailure(new Failure().withMessage("Test suite was interrupted, some test cases may be lost"))

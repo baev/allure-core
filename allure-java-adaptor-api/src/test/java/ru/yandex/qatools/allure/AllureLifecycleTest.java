@@ -28,9 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -222,7 +220,6 @@ public class AllureLifecycleTest {
 
     private void checkTestCaseIsNew(TestCaseResult testCaseResult) {
         assertNull(testCaseResult.getName());
-        assertNull(testCaseResult.getTitle());
         assertNull(testCaseResult.getDescription());
         assertNull(testCaseResult.getFailure());
         assertNull(testCaseResult.getStatus());
@@ -300,18 +297,16 @@ public class AllureLifecycleTest {
     }
 
     public TestSuiteResult fireCustomTestSuiteEvent(String uid) {
-        Allure.LIFECYCLE.fire(new ChangeTestSuiteTitleEvent(uid, "new.suite.title"));
+        Allure.LIFECYCLE.fire(new ChangeTestSuiteNameEvent(uid, "new.suite.title"));
         TestSuiteResult testSuite = Allure.LIFECYCLE.getTestSuiteStorage().get(uid);
         assertNotNull(testSuite);
-        assertThat(testSuite.getTitle(), is("new.suite.title"));
         return testSuite;
     }
 
     public TestCaseResult fireCustomTestCaseEvent() {
-        Allure.LIFECYCLE.fire(new ChangeTestCaseTitleEvent("new.case.title"));
+        Allure.LIFECYCLE.fire(new ChangeTestCaseNameEvent("new.case.title"));
         TestCaseResult testCase = Allure.LIFECYCLE.getTestCaseStorage().get();
         assertNotNull(testCase);
-        assertThat(testCase.getTitle(), is("new.case.title"));
         return testCase;
     }
 

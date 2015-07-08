@@ -3,8 +3,7 @@
     <name>my.company.BeforeClassFailTest</name>
     <test-cases>
         <test-case start="1412949539770" stop="1412949539779" status="broken">
-            <name>my.company.BeforeClassFailTest</name>
-            <title>BeforeClassFailTest</title>
+            <name>BeforeClassFailTest</name>
             <failure>
                 <message>RuntimeException: bye-bye</message>
                 <stack-trace>java.lang.RuntimeException: bye-bye

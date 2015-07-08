@@ -14,8 +14,6 @@ public interface WithInfoView {
 
     String getName();
 
-    String getTitle();
-
     SeverityLevel getSeverity();
 
     Time getTime();
@@ -26,7 +24,6 @@ public interface WithInfoView {
         AllureTestCaseInfo info = new AllureTestCaseInfo();
         info.setUid(getUid());
         info.setName(getName());
-        info.setTitle(getTitle());
         info.setSeverity(getSeverity());
         info.setTime(getTime());
         info.setStatus(getStatus());

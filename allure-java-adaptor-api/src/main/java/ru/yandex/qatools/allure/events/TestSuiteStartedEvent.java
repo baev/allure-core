@@ -36,20 +36,8 @@ public class TestSuiteStartedEvent extends AbstractTestSuiteStartedEvent {
     public void process(TestSuiteResult testSuite) {
         testSuite.setStart(System.currentTimeMillis());
         testSuite.setName(getName());
-        testSuite.setTitle(getTitle());
         testSuite.setDescription(getDescription());
         testSuite.setLabels(getLabels());
-    }
-
-    /**
-     * Sets title using fluent-api
-     *
-     * @param title value to set
-     * @return modified instance
-     */
-    public TestSuiteStartedEvent withTitle(String title) {
-        setTitle(title);
-        return this;
     }
 
     /**

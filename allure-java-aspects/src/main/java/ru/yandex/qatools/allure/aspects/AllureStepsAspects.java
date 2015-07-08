@@ -13,7 +13,6 @@ import ru.yandex.qatools.allure.events.StepFailureEvent;
 import ru.yandex.qatools.allure.events.StepFinishedEvent;
 import ru.yandex.qatools.allure.events.StepStartedEvent;
 
-import static ru.yandex.qatools.allure.aspects.AllureAspectUtils.getName;
 import static ru.yandex.qatools.allure.aspects.AllureAspectUtils.getTitle;
 
 /**
@@ -38,16 +37,10 @@ public class AllureStepsAspects {
 
     @Before("anyMethod() && withStepAnnotation()")
     public void stepStart(JoinPoint joinPoint) {
-        String stepTitle = createTitle(joinPoint);
+        String stepName = getStepName(joinPoint);
 
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        StepStartedEvent startedEvent = new StepStartedEvent(
-                getName(methodSignature.getName(), joinPoint.getArgs())
-        );
-
-        if (!stepTitle.isEmpty()) {
-            startedEvent.setTitle(stepTitle);
-        }
+        StepStartedEvent startedEvent = new StepStartedEvent(stepName);
 
         ALLURE.fire(startedEvent);
     }
@@ -63,7 +56,7 @@ public class AllureStepsAspects {
         ALLURE.fire(new StepFinishedEvent());
     }
 
-    public String createTitle(JoinPoint joinPoint) {
+    public String getStepName(JoinPoint joinPoint) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Step step = methodSignature.getMethod().getAnnotation(Step.class);
         return step == null ? "" : getTitle(step.value(), methodSignature.getName(), joinPoint.getThis(), joinPoint.getArgs());

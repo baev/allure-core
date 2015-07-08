@@ -42,8 +42,7 @@ Expected: is &lt;4&gt;
             </labels>
         </test-case>
         <test-case start="1412949558829" stop="1412949558829" status="passed">
-            <name>longTitleTest</name>
-            <title>Test what do nothing and always passed right, but have a very long title, over 100 symbols, seriously</title>
+            <name>Test what do nothing and always passed right, but have a very long title, over 100 symbols, seriously</name>
             <description type="text">I hate descriptions! See the title!</description>
             <steps/>
             <attachments/>
@@ -88,8 +87,7 @@ Expected: is &lt;4&gt;
             </labels>
         </test-case>
         <test-case start="1412949558831" stop="1412949558832" status="pending">
-            <name>my.company.SimpleTest</name>
-            <title>skippedSimpleTest</title>
+            <name>skippedSimpleTest</name>
             <failure>
                 <message>Test ignored (without reason)!</message>
                 <stack-trace>There are no stack trace</stack-trace>

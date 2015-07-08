@@ -38,20 +38,8 @@ public class TestCaseStartedEvent extends AbstractTestCaseStartedEvent {
         testCase.setStart(System.currentTimeMillis());
         testCase.setStatus(Status.PASSED);
         testCase.setName(getName());
-        testCase.setTitle(getTitle());
         testCase.setDescription(getDescription());
         testCase.setLabels(getLabels());
-    }
-
-    /**
-     * Sets title using fluent-api
-     *
-     * @param title value to set
-     * @return modified instance
-     */
-    public TestCaseStartedEvent withTitle(String title) {
-        setTitle(title);
-        return this;
     }
 
     /**

@@ -92,7 +92,7 @@ public class AnnotationManagerTest {
         TestSuiteStartedEvent event = new TestSuiteStartedEvent("some.uid", "some.name");
         annotationManager.update(event);
 
-        assertThat(event.getTitle(), equalTo("some.title"));
+        assertThat(event.getName(), equalTo("some.title"));
 
         Description description = annotationManager.getDescription();
         assertThat(description.getValue(), is("some.description"));
@@ -115,7 +115,7 @@ public class AnnotationManagerTest {
         TestCaseStartedEvent event = new TestCaseStartedEvent("some.uid", "some.name");
         annotationManager.update(event);
 
-        assertThat(event.getTitle(), equalTo("some.title"));
+        assertThat(event.getName(), equalTo("some.title"));
 
         Description description = annotationManager.getDescription();
         assertThat(description.getValue(), is("some.description"));
@@ -137,8 +137,6 @@ public class AnnotationManagerTest {
 
         TestCaseStartedEvent event = new TestCaseStartedEvent("some.uid", "some.name");
         annotationManager.update(event);
-
-        assertThat(event.getTitle(), equalTo("some.title"));
 
         Description description = annotationManager.getDescription();
         assertThat(description.getValue(), is("some.description"));
@@ -162,7 +160,6 @@ public class AnnotationManagerTest {
         TestCaseStartedEvent event = new TestCaseStartedEvent("some.uid", "some.name");
         annotationManager.update(event);
 
-        assertThat(event.getTitle(), is(nullValue()));
         Description description = annotationManager.getDescription();
         assertThat(description, is(nullValue()));
         assertThat(event.getLabels(), hasItems(
@@ -179,7 +176,6 @@ public class AnnotationManagerTest {
         TestCaseStartedEvent event = new TestCaseStartedEvent("some.uid", "some.name");
         annotationManager.update(event);
        
-        assertThat(event.getTitle(), is(nullValue()));
         Description description = annotationManager.getDescription();
         assertThat(description, is(nullValue()));
         assertThat(event.getLabels(), hasItems(

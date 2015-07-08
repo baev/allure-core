@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns2:test-suite xmlns:ns2="urn:model.allure.qatools.yandex.ru" start="1412949538852" stop="1412949559021" version="1.4.4-SNAPSHOT">
     <name>my.company.ScreenshotTest</name>
-    <title>Search tests</title>
     <description type="markdown">
 ### H3
 after this line we should collapse all of that
@@ -18,7 +17,6 @@ This testsuite has tests what *always are passing*
     <test-cases>
         <test-case start="1412949551164" stop="1412949558737" status="passed">
             <name>wildcardSearch</name>
-            <title>Wildcard search test</title>
             <description type="markdown">### h3 *italic* **bold**
 allure core ![https://img.shields.io/teamcity/http/teamcity.qatools.ru/s/allure_core_master_deploy.svg?style=flat](https://img.shields.io/teamcity/http/teamcity.qatools.ru/s/allure_core_master_deploy.svg?style=flat)
 [repository](https://github.com/allure-framework/allure-core)
@@ -53,7 +51,6 @@ just http://yandex.ru
         </test-case>
         <test-case start="1412949551164" stop="1412949558826" status="passed">
             <name>usualSearch</name>
-            <title>Usual search test</title>
             <steps>
                 <step start="1412949554710" stop="1412949555504" status="passed">
                     <name>openMainPage</name>
@@ -77,7 +74,6 @@ just http://yandex.ru
         </test-case>
         <test-case start="1412949551164" stop="1412949556298" status="failed">
             <name>pageLoadingTest</name>
-            <title>Page loading test</title>
             <failure>
                 <message>AssertionError: Text on current page should be correct
 Expected: element text is "Yandex"
@@ -120,7 +116,6 @@ Expected: element text is "Yandex"
                 </step>
                 <step start="1412949555680" stop="1412949555733" status="failed">
                     <name>checkText[[[PhantomJSDriver: phantomjs on MAC (9e679b20-5085-11e4-ad6d-87edf8da84a7)] -&gt; css selector: title], Yandex]</name>
-                    <title>Check text in element</title>
                 </step>
             </steps>
             <attachments>
@@ -141,7 +136,6 @@ Expected: element text is "Yandex"
         </test-case>
         <test-case start="1412949551164" stop="1412949558344" status="passed">
             <name>emptyTextSearch</name>
-            <title>Empty text search</title>
             <steps>
                 <step start="1412949554710" stop="1412949555515" status="passed">
                     <name>openMainPage</name>

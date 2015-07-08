@@ -7,13 +7,13 @@ import ru.yandex.qatools.allure.model.TestSuiteResult;
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 15.12.13
  */
-public class ChangeTestSuiteTitleEvent implements TestSuiteEvent {
+public class ChangeTestSuiteNameEvent implements TestSuiteEvent {
     private String uid;
-    private String title;
+    private String name;
 
-    public ChangeTestSuiteTitleEvent(String uid, String title) {
+    public ChangeTestSuiteNameEvent(String uid, String title) {
         this.uid = uid;
-        this.title = title;
+        this.name = title;
     }
 
     @Override
@@ -23,6 +23,6 @@ public class ChangeTestSuiteTitleEvent implements TestSuiteEvent {
 
     @Override
     public void process(TestSuiteResult context) {
-        context.setTitle(title);
+        context.setName(name);
     }
 }

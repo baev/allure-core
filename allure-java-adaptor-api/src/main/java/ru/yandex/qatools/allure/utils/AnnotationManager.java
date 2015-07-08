@@ -106,7 +106,7 @@ public class AnnotationManager {
      */
     public void update(TestSuiteStartedEvent event) {
         if (isTitleAnnotationPresent()) {
-            event.setTitle(getTitle());
+            event.setName(getTitle());
         }
 
         if (isDescriptionAnnotationPresent()) {
@@ -135,7 +135,7 @@ public class AnnotationManager {
      */
     public void update(TestCaseStartedEvent event) {
         if (isTitleAnnotationPresent()) {
-            event.setTitle(getTitle());
+            event.setName(getTitle());
         }
 
         if (isDescriptionAnnotationPresent()) {

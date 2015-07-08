@@ -113,8 +113,7 @@ public class StepStorage extends InheritableThreadLocal<Deque<Step>> {
      */
     public Step createRootStep() {
         return new Step()
-                .withName("Root step")
-                .withTitle("Allure step processing error: if you see this step something went wrong.")
+                .withName("Allure step processing error: if you see this step something went wrong.")
                 .withStart(System.currentTimeMillis())
                 .withStatus(Status.BROKEN);
     }

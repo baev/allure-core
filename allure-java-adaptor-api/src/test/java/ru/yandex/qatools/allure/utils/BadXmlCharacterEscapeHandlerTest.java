@@ -51,8 +51,7 @@ public class BadXmlCharacterEscapeHandlerTest {
     @Before
     public void setUp() throws Exception {
         testSuiteResultFile = folder.newFile();
-        result = new TestSuiteResult().withName("name-and-кириллицей-also");
-        result.setTitle("prefix " + character + " suffix");
+        result = new TestSuiteResult().withName("name-and-кириллицей-also " + character + " suffix");
     }
 
     @Test
@@ -63,8 +62,7 @@ public class BadXmlCharacterEscapeHandlerTest {
         validator.validate(new StreamSource(testSuiteResultFile));
 
         TestSuiteResult testSuite = JAXB.unmarshal(testSuiteResultFile, TestSuiteResult.class);
-        assertThat(testSuite.getName(), is("name-and-кириллицей-also"));
-        assertTrue(testSuite.getTitle().startsWith("prefix "));
-        assertTrue(testSuite.getTitle().endsWith(" suffix"));
+        assertTrue(testSuite.getName().startsWith("name-and-кириллицей-also "));
+        assertTrue(testSuite.getName().endsWith(" suffix"));
     }
 }

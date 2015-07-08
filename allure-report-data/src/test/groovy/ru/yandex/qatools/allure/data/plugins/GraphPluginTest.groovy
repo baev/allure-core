@@ -17,7 +17,7 @@ class GraphPluginTest {
 
     @Test
     void shouldSaveInfo() {
-        def testCase = new AllureTestCase(uid: "uid", name: "name", title: "title", status: PASSED)
+        def testCase = new AllureTestCase(uid: "uid", name: "name", status: PASSED)
         plugin.process(testCase)
         assert plugin.graph.testCases.size() == 1
 

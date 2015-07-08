@@ -7,15 +7,15 @@ import ru.yandex.qatools.allure.model.TestCaseResult;
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 15.12.13
  */
-public class ChangeTestCaseTitleEvent implements TestCaseEvent {
-    private String title;
+public class ChangeTestCaseNameEvent implements TestCaseEvent {
+    private String name;
 
-    public ChangeTestCaseTitleEvent(String title) {
-        this.title = title;
+    public ChangeTestCaseNameEvent(String name) {
+        this.name = name;
     }
 
     @Override
     public void process(TestCaseResult context) {
-        context.setTitle(title);
+        context.setName(name);
     }
 }

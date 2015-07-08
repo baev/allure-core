@@ -6,8 +6,7 @@
 many lines in description</description>
     <test-cases>
         <test-case start="1412949539800" stop="1412949540461" status="failed">
-            <name>longAssertionTest</name>
-            <title>Test with long assertion text</title>
+            <name>Test with long assertion text</name>
             <failure>
                 <message>AssertionError: 
 Expected: "{\n\"name\": \"test\",\n\"value\": \"ok value\"\n}"
@@ -60,8 +59,7 @@ Expected: "{\n\"name\": \"test\",\n\"value\": \"ok value\"\n}"
             </parameters>
         </test-case>
         <test-case start="1412949539801" stop="1412949540559" status="failed">
-            <name>attachmentsTest</name>
-            <title>&lt;script&gt;3443&lt;/script&gt;</title>
+            <name>&lt;script&gt;3443&lt;/script&gt;</name>
             <description type="text">Single-line description</description>
             <failure>
                 <message>AssertionError: This test should be failed</message>
@@ -92,8 +90,7 @@ Expected: "{\n\"name\": \"test\",\n\"value\": \"ok value\"\n}"
             </failure>
             <steps>
                 <step start="1412949540546" stop="1412949540559" status="failed">
-                    <name>makeThisTestFailed</name>
-                    <title>Make this test failed</title>
+                    <name>Make this test failed</name>
                     <attachments>
                         <attachment title="TXT Attachment" source="01261e59-9b21-408d-9dff-34daec2addff-attachment.txt" type="text/plain"/>
                     </attachments>
@@ -151,29 +148,23 @@ Expected: "{\n\"name\": \"test\",\n\"value\": \"ok value\"\n}"
             <steps>
                 <step start="1412949539854" stop="1412949539857" status="passed">
                     <name>parentStep</name>
-                    <title>Parent step</title>
                     <steps>
                         <step start="1412949539854" stop="1412949539857" status="passed">
                             <name>step[First nested]</name>
-                            <title>"First nested" step</title>
                         </step>
                         <step start="1412949539857" stop="1412949539857" status="passed">
                             <name>step[Second nested]</name>
-                            <title>"Second nested" step</title>
                         </step>
                         <step start="1412949539857" stop="1412949539857" status="passed">
                             <name>step[Third nested]</name>
-                            <title>"Third nested" step</title>
                         </step>
                     </steps>
                 </step>
                 <step start="1412949539858" stop="1412949539858" status="passed">
                     <name>step[Last]</name>
-                    <title>"Last" step</title>
                 </step>
                 <step start="1412949539858" stop="1412949539862" status="broken">
-                    <name>makeThisTestBroken</name>
-                    <title>Make this test broken</title>
+                    <name>Make this test broken</name>
                 </step>
             </steps>
             <attachments/>

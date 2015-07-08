@@ -129,7 +129,7 @@ class TestCaseReaderTest {
 
     @Test
     void shouldEscapeInvalidXmlCharacters() {
-        def suiteReader = new TestSuiteReader(new File(getClass().classLoader.getResource("testresults").getFile()))
+        def suiteReader = new TestSuiteReader(new File(getClass().classLoader.getResource("testresults").file))
         def reader = new TestCaseReader(suiteReader)
 
         def iterator = reader.iterator()
@@ -137,8 +137,7 @@ class TestCaseReaderTest {
         def next = iterator.next()
 
         assert next
-        assert next.name == '&1234567890someStep '
-        assert next.title == 'Ω≈ç√∫˜≤≥ç!@#\$%^*()йцукенгшщзхъфывапролджэёячсмитьбю  '
+        assert next.name == '&1234567890someStep Ω≈ç√∫˜≤≥ç!@#$%^*()йцукенгшщзхъфывапролджэёячсмитьбю  '
     }
 
     static def getReader(List<TestSuiteResult> testSuites) {

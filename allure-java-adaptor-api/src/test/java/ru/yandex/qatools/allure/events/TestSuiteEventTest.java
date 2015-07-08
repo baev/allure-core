@@ -32,7 +32,6 @@ public class TestSuiteEventTest {
         new TestSuiteStartedEvent("some.uid", "name").process(testSuite);
         verify(testSuite).setStart(anyLong());
         verify(testSuite).setName("name");
-        verify(testSuite).setTitle(null);
         verify(testSuite).setDescription(null);
         verify(testSuite).setLabels(Collections.<Label>emptyList());
         verifyNoMoreInteractions(testSuite);
@@ -40,10 +39,9 @@ public class TestSuiteEventTest {
 
     @Test
     public void testSuiteStartedEventTitle() throws Exception {
-        new TestSuiteStartedEvent("suite.uid", "name").withTitle("some.title").process(testSuite);
+        new TestSuiteStartedEvent("suite.uid", "name").process(testSuite);
         verify(testSuite).setStart(anyLong());
         verify(testSuite).setName("name");
-        verify(testSuite).setTitle("some.title");
         verify(testSuite).setDescription(null);
         verify(testSuite).setLabels(Collections.<Label>emptyList());
         verifyNoMoreInteractions(testSuite);
@@ -58,7 +56,6 @@ public class TestSuiteEventTest {
         new TestSuiteStartedEvent("suite.uid", "name").withDescription(description).process(testSuite);
         verify(testSuite).setStart(anyLong());
         verify(testSuite).setName("name");
-        verify(testSuite).setTitle(null);
         verify(testSuite).setDescription(description);
         verify(testSuite).setLabels(Collections.<Label>emptyList());
         verifyNoMoreInteractions(testSuite);
@@ -70,7 +67,6 @@ public class TestSuiteEventTest {
         new TestSuiteStartedEvent("suite.uid", "name").withLabels(label).process(testSuite);
         verify(testSuite).setStart(anyLong());
         verify(testSuite).setName("name");
-        verify(testSuite).setTitle(null);
         verify(testSuite).setDescription(null);
         verify(testSuite).setLabels(Arrays.asList(label));
         verifyNoMoreInteractions(testSuite);

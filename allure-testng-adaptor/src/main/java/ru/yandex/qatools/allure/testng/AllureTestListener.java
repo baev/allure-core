@@ -75,8 +75,6 @@ public class AllureTestListener implements IResultListener, ISuiteListener {
     public void onStart(ITestContext iTestContext) {
         getLifecycle().fire(new TestSuiteStartedEvent(
                 getSuiteUid(iTestContext), getCurrentSuiteTitle(iTestContext)
-        ).withTitle(
-                getCurrentSuiteTitle(iTestContext)
         ).withLabels(
                 AllureModelUtils.createTestFrameworkLabel("TestNG")
         ));
@@ -101,7 +99,7 @@ public class AllureTestListener implements IResultListener, ISuiteListener {
         String suiteUid = getSuiteUid(iTestResult.getTestContext());
         if (isAfterSuiteConfigMethod(iTestResult)) {
             String suiteTitle = getCurrentSuiteTitle(iTestResult.getTestContext());
-            getLifecycle().fire(new TestSuiteStartedEvent(suiteUid, suiteTitle).withTitle(suiteTitle));
+            getLifecycle().fire(new TestSuiteStartedEvent(suiteUid, suiteTitle));
         }
         Throwable throwable = iTestResult.getThrowable();
         createConfigEvent(iTestResult);
@@ -120,7 +118,7 @@ public class AllureTestListener implements IResultListener, ISuiteListener {
         String suiteUid = getSuiteUid(iTestResult.getTestContext());
         if (isAfterSuiteConfigMethod(iTestResult)) {
             String suiteTitle = getCurrentSuiteTitle(iTestResult.getTestContext());
-            getLifecycle().fire(new TestSuiteStartedEvent(suiteUid, suiteTitle).withTitle(suiteTitle));
+            getLifecycle().fire(new TestSuiteStartedEvent(suiteUid, suiteTitle));
         }
         createConfigEvent(iTestResult);
         fireTestCaseCancel(iTestResult);
