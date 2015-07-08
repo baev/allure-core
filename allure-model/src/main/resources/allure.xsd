@@ -151,20 +151,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="label-name">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="feature"/>
-            <xs:enumeration value="story"/>
-            <xs:enumeration value="severity"/>
-            <xs:enumeration value="language"/>
-            <xs:enumeration value="framework"/>
-            <xs:enumeration value="issue"/>
-            <xs:enumeration value="testId"/>
-            <xs:enumeration value="host"/>
-            <xs:enumeration value="thread"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="severity-level">
         <xs:restriction base="xs:string">
             <xs:enumeration value="blocker"/>
@@ -191,11 +177,4 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:annotation>
-        <xs:appinfo>
-            <jaxb:globalBindings>
-                <xjc:serializable uid="1"/>
-            </jaxb:globalBindings>
-        </xs:appinfo>
-    </xs:annotation>
 </xs:schema>

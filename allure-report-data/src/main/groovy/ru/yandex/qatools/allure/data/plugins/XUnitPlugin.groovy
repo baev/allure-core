@@ -7,8 +7,10 @@ import ru.yandex.qatools.allure.data.AllureXUnit
 import ru.yandex.qatools.allure.data.ReportGenerationException
 import ru.yandex.qatools.allure.data.Statistic
 import ru.yandex.qatools.allure.data.StatsWidgetItem
-import ru.yandex.qatools.allure.data.Time
 import ru.yandex.qatools.allure.data.utils.PluginUtils
+import ru.yandex.qatools.allure.model.Time
+
+import static ru.yandex.qatools.allure.data.utils.TextUtils.generateUid
 
 /**
  * @author Dmitry Baev charlie@yandex-team.ru
@@ -29,29 +31,30 @@ class XUnitPlugin extends DefaultTabPlugin implements WithWidget {
             throw new ReportGenerationException("Test case status should not be null")
         }
 
-        def uid = testCase.suite.uid
-        if (!testSuites.containsKey(uid)) {
+        def suiteName = testCase.suite
+        if (!testSuites.containsKey(suiteName)) {
             def suite = new AllureTestSuite()
 
             use(InvokerHelper) {
                 suite.properties = testCase.suite.properties
             }
 
+            suite.uid = generateUid()
+            suite.name = suiteName
             suite.statistic = new Statistic()
             suite.time = new Time(start: Long.MAX_VALUE, stop: Long.MIN_VALUE)
-            testSuites[uid] = suite
+            testSuites[suiteName] = suite
             xUnit.testSuites.add(suite)
         }
 
-        def suite = testSuites[uid]
+        def suite = testSuites[suiteName]
 
         use(PluginUtils) {
             suite.statistic.update(testCase.status)
-            suite.time.update(testCase.time)
-            suite.getTestCases().add(testCase.toInfo())
-
-            xUnit.time.update(testCase.time)
         }
+        suite.time.update(testCase.time)
+        suite.testCases.add(testCase.toInfo())
+        xUnit.time.update(testCase.time)
     }
 
     @Override

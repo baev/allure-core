@@ -39,7 +39,7 @@ public class DirectoryMatcher {
         }
     }
 
-    public static Matcher contains(String fileName) {
+    public static Matcher<File> contains(String fileName) {
         return new Contains(fileName);
     }
 }

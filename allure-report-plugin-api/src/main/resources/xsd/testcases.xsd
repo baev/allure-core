@@ -4,14 +4,6 @@
             xmlns:alr="urn:data.allure.qatools.yandex.ru"
             targetNamespace="urn:data.allure.qatools.yandex.ru">
 
-    <xsd:complexType name="allure-test-suite-info">
-        <xsd:all>
-            <xsd:element name="uid" type="xsd:string"/>
-            <xsd:element name="name" type="xsd:string"/>
-            <xsd:element name="title" type="xsd:string"/>
-        </xsd:all>
-    </xsd:complexType>
-
     <xsd:complexType name="allure-test-cases">
         <xsd:sequence>
             <xsd:element name="test-case" type="alr:allure-test-case" minOccurs="0" maxOccurs="unbounded"/>
@@ -36,7 +28,7 @@
             <xsd:element name="testId" type="alr:testId" minOccurs="0"/>
             <xsd:element name="labels" type="alr:labels" minOccurs="0"/>
             <xsd:element name="parameters" type="alr:parameters" minOccurs="0"/>
-            <xsd:element name="suite" type="alr:allure-test-suite-info"/>
+            <xsd:element name="suite" type="xsd:string"/>
         </xsd:all>
     </xsd:complexType>
 
@@ -78,17 +70,6 @@
         <xsd:attribute name="broken" type="xsd:long" default="0"/>
     </xsd:complexType>
 
-    <xsd:complexType name="time">
-        <xsd:attribute name="start" type="xsd:long" default="0"/>
-        <xsd:attribute name="stop" type="xsd:long" default="0"/>
-        <xsd:attribute name="duration" type="xsd:long" default="0"/>
-    </xsd:complexType>
-
-    <xsd:complexType name="summary">
-        <xsd:attribute name="attachments" type="xsd:long" default="0"/>
-        <xsd:attribute name="steps" type="xsd:long" default="0"/>
-    </xsd:complexType>
-
     <xsd:complexType name="attachments">
         <xsd:sequence>
             <xsd:element name="attachment" type="alr:allure-attachment" minOccurs="0" maxOccurs="unbounded"/>
@@ -126,20 +107,14 @@
         </xsd:sequence>
     </xsd:complexType>
 
-    <xsd:complexType name="issue">
-        <xsd:attribute name="name" type="xsd:string"/>
-        <xsd:attribute name="url" type="xsd:string"/>
-    </xsd:complexType>
-
-    <xsd:complexType name="testId">
-        <xsd:attribute name="name" type="xsd:string"/>
-        <xsd:attribute name="url" type="xsd:string"/>
-    </xsd:complexType>
-
     <xsd:complexType name="status"/>
     <xsd:complexType name="severity-level"/>
     <xsd:complexType name="failure"/>
     <xsd:complexType name="label"/>
     <xsd:complexType name="description"/>
     <xsd:complexType name="parameter"/>
+    <xsd:complexType name="time"/>
+    <xsd:complexType name="summary"/>
+    <xsd:complexType name="testId"/>
+    <xsd:complexType name="issue"/>
 </xsd:schema>

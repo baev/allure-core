@@ -3,17 +3,17 @@ package ru.yandex.qatools.allure.data.utils
 import org.codehaus.groovy.runtime.InvokerHelper
 import ru.yandex.qatools.allure.data.AllureTestCase
 import ru.yandex.qatools.allure.data.AllureTestCaseInfo
-import ru.yandex.qatools.allure.data.Issue
 import ru.yandex.qatools.allure.data.Statistic
-import ru.yandex.qatools.allure.data.TestId
-import ru.yandex.qatools.allure.data.Time
 import ru.yandex.qatools.allure.data.io.TestCaseReader
 import ru.yandex.qatools.allure.model.Description
+import ru.yandex.qatools.allure.model.Issue
 import ru.yandex.qatools.allure.model.LabelName
 import ru.yandex.qatools.allure.model.SeverityLevel
 import ru.yandex.qatools.allure.model.Status
 import ru.yandex.qatools.allure.model.Step
 import ru.yandex.qatools.allure.model.TestCaseResult
+import ru.yandex.qatools.allure.model.TestId
+import ru.yandex.qatools.allure.model.Time
 
 import static ru.yandex.qatools.allure.model.DescriptionType.MARKDOWN
 import static ru.yandex.qatools.allure.model.LabelName.FEATURE
@@ -42,14 +42,6 @@ final class PluginUtils {
     }
 
 //    TestCaseResult
-
-    static def getSuiteName(TestCaseResult testCase) {
-        getLabelValue(testCase, TestCaseReader.SUITE_NAME);
-    }
-
-    static def getSuiteTitle(TestCaseResult testCase) {
-        getLabelValue(testCase, TestCaseReader.SUITE_TITLE);
-    }
 
     static def getConvertedDescription(TestCaseResult testCase) {
         switch (testCase?.description?.type) {

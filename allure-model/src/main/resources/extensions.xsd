@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+           xmlns:qa="urn:model.allure.qatools.yandex.ru"
+           targetNamespace="urn:model.allure.qatools.yandex.ru"
+           jaxb:extensionBindingPrefixes="xjc"
+           jaxb:version="1.0">
+
+    <xs:include schemaLocation="allure.xsd"/>
+
+    <xs:simpleType name="label-name">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="feature"/>
+            <xs:enumeration value="story"/>
+            <xs:enumeration value="severity"/>
+            <xs:enumeration value="language"/>
+            <xs:enumeration value="framework"/>
+            <xs:enumeration value="issue"/>
+            <xs:enumeration value="testId"/>
+            <xs:enumeration value="host"/>
+            <xs:enumeration value="thread"/>
+            <xs:enumeration value="suite"/>
+            <xs:enumeration value="class"/>
+            <xs:enumeration value="method"/>
+            <xs:enumeration value="group"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="time">
+        <xs:attribute name="start" type="xs:long" default="0"/>
+        <xs:attribute name="stop" type="xs:long" default="0"/>
+        <xs:attribute name="duration" type="xs:long" default="0"/>
+    </xs:complexType>
+
+    <xs:complexType name="summary">
+        <xs:attribute name="attachments" type="xs:long" default="0"/>
+        <xs:attribute name="steps" type="xs:long" default="0"/>
+    </xs:complexType>
+
+    <xs:complexType name="issue">
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="url" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="testId">
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="url" type="xs:string"/>
+    </xs:complexType>
+</xs:schema>

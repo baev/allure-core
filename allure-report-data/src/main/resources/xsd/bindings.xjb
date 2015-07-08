@@ -13,7 +13,7 @@
     </jaxb:bindings>
 
     <jaxb:bindings node="//xsd:complexType[@name='time']">
-        <jaxb:class ref="ru.yandex.qatools.allure.data.Time"/>
+        <jaxb:class ref="ru.yandex.qatools.allure.model.Time"/>
     </jaxb:bindings>
 
     <jaxb:bindings node="//xsd:complexType[@name='status']">

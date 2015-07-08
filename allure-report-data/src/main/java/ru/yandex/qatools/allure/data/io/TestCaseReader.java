@@ -1,7 +1,9 @@
 package ru.yandex.qatools.allure.data.io;
 
 import com.google.inject.Inject;
+import ru.yandex.qatools.allure.config.AllureModelUtils;
 import ru.yandex.qatools.allure.model.Label;
+import ru.yandex.qatools.allure.model.LabelName;
 import ru.yandex.qatools.allure.model.TestCaseResult;
 import ru.yandex.qatools.allure.model.TestSuiteResult;
 import ru.yandex.qatools.allure.model.Description;
@@ -15,9 +17,6 @@ import static ru.yandex.qatools.allure.data.utils.DescriptionUtils.mergeDescript
  *         Date: 09.02.15
  */
 public class TestCaseReader implements Reader<TestCaseResult> {
-
-    public static final String SUITE_NAME = "suite-name";
-    public static final String SUITE_TITLE = "suite-title";
 
     private Iterator<TestSuiteResult> testSuites;
 
@@ -61,8 +60,7 @@ public class TestCaseReader implements Reader<TestCaseResult> {
 
             TestCaseResult result = testCases.next();
 
-            result.getLabels().add(new Label().withName(SUITE_NAME).withValue(currentSuite.getName()));
-            result.getLabels().add(new Label().withName(SUITE_TITLE).withValue(currentSuite.getTitle()));
+            result.getLabels().add(AllureModelUtils.createLabel(LabelName.SUITE, currentSuite.getName()));
             result.getLabels().addAll(currentSuite.getLabels());
             Description description = mergeDescriptions(currentSuite, result);
             result.setDescription(description);

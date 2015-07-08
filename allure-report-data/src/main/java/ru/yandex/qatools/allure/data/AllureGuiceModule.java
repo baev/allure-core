@@ -13,7 +13,6 @@ import ru.yandex.qatools.allure.data.io.TestSuiteReader;
 import ru.yandex.qatools.allure.data.plugins.PluginClassLoader;
 import ru.yandex.qatools.allure.data.plugins.PluginLoader;
 import ru.yandex.qatools.allure.data.plugins.PluginLoaderSpi;
-import ru.yandex.qatools.allure.data.plugins.PluginManager;
 import ru.yandex.qatools.allure.model.TestCaseResult;
 import ru.yandex.qatools.allure.model.TestSuiteResult;
 import ru.yandex.qatools.commons.model.Environment;
@@ -50,7 +49,6 @@ public class AllureGuiceModule extends AbstractModule {
         }).to(AttachmentReader.class);
 
         bind(PluginLoader.class).to(PluginLoaderSpi.class);
-        bind(PluginManager.class);
 
         bind(TestCaseConverter.class).to(DefaultTestCaseConverter.class);
     }

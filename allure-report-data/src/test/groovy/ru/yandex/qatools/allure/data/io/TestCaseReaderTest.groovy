@@ -89,17 +89,14 @@ class TestCaseReaderTest {
         def testCase = new TestCaseResult(name: "testCase")
 
         def label = new Label(name: "someName", value: "someValue")
-        def testSuite = new TestSuiteResult(name: "name", title: "title", testCases: [testCase], labels: [label])
+        def testSuite = new TestSuiteResult(name: "name", testCases: [testCase], labels: [label])
 
         def reader = getReader([testSuite]);
 
         def next = reader.iterator().next()
-        use(PluginUtils) {
-            assert next
-            assert next.getSuiteName() == "name"
-            assert next.getSuiteTitle() == "title"
-            assert next.getLabels().contains(label)
-        }
+        assert next
+        assert next.suite == "name"
+        assert next.labels.contains(label)
     }
 
     @Test(expected = UnsupportedOperationException)

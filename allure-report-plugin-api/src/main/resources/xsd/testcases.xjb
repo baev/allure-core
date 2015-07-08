@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:annox="http://annox.dev.java.net"
+               xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_1.xsd"
+               xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
+               jaxb:extensionBindingPrefixes="xjc annox"
                schemaLocation="testcases.xsd"
                jaxb:version="2.1">
 
@@ -28,4 +34,23 @@
         <jaxb:class ref="ru.yandex.qatools.allure.model.Parameter"/>
     </jaxb:bindings>
 
+    <jaxb:bindings node="//xsd:complexType[@name='time']">
+        <jaxb:class ref="ru.yandex.qatools.allure.model.Time"/>
+    </jaxb:bindings>
+
+    <jaxb:bindings node="//xsd:complexType[@name='summary']">
+        <jaxb:class ref="ru.yandex.qatools.allure.model.Summary"/>
+    </jaxb:bindings>
+
+    <jaxb:bindings node="//xsd:complexType[@name='testId']">
+        <jaxb:class ref="ru.yandex.qatools.allure.model.TestId"/>
+    </jaxb:bindings>
+
+    <jaxb:bindings node="//xsd:complexType[@name='issue']">
+        <jaxb:class ref="ru.yandex.qatools.allure.model.Issue"/>
+    </jaxb:bindings>
+
+    <jaxb:bindings node="//xsd:complexType[@name='allure-test-case']">
+        <inheritance:implements>ru.yandex.qatools.allure.data.WithInfoView</inheritance:implements>
+    </jaxb:bindings>
 </jaxb:bindings>

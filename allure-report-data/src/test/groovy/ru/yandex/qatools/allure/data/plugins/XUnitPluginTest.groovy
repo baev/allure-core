@@ -3,19 +3,12 @@ package ru.yandex.qatools.allure.data.plugins
 import org.codehaus.groovy.runtime.InvokerHelper
 import org.junit.Test
 import ru.yandex.qatools.allure.data.AllureTestCase
-import ru.yandex.qatools.allure.data.AllureTestSuiteInfo
 import ru.yandex.qatools.allure.data.ReportGenerationException
 import ru.yandex.qatools.allure.data.Statistic
-import ru.yandex.qatools.allure.data.Time
 import ru.yandex.qatools.allure.data.WidgetType
-import ru.yandex.qatools.allure.data.io.TestCaseReader
-import ru.yandex.qatools.allure.data.io.TestSuiteReader
 import ru.yandex.qatools.allure.data.utils.PluginUtils
-import ru.yandex.qatools.allure.model.Failure
-import ru.yandex.qatools.allure.model.Label
+import ru.yandex.qatools.allure.model.Time
 
-import static ru.yandex.qatools.allure.config.AllureModelUtils.createFeatureLabel
-import static ru.yandex.qatools.allure.config.AllureModelUtils.createLabel
 import static ru.yandex.qatools.allure.model.Status.BROKEN
 import static ru.yandex.qatools.allure.model.Status.FAILED
 import static ru.yandex.qatools.allure.model.Status.PASSED
@@ -40,7 +33,7 @@ class XUnitPluginTest {
     @Test
     void shouldGroupBySuite() {
         def testCase = new AllureTestCase(uid: "uid", name: "name", status: PASSED,
-                suite: new AllureTestSuiteInfo(uid: "suiteUid", name: "suiteName"),
+                suite: "suiteName",
                 time: new Time(start: 1, stop: 10)
         )
 
@@ -54,7 +47,6 @@ class XUnitPluginTest {
         assert plugin.xUnit.testSuites.size() == 1
 
         def suite = plugin.xUnit.testSuites[0]
-        assert suite.uid == "suiteUid"
         assert suite.name == "suiteName"
 
         assert suite.time
@@ -69,7 +61,7 @@ class XUnitPluginTest {
         assert suite.testCases.size() == 1
 
         def info = suite.testCases[0]
-        use([InvokerHelper, PluginUtils]) {
+        use([InvokerHelper]) {
             assert info.getProperties() == testCase.toInfo().getProperties()
         }
 
@@ -78,17 +70,17 @@ class XUnitPluginTest {
     @Test
     void shouldGroupBySuiteFewTestCases() {
         def testCase1 = new AllureTestCase(uid: "uid1", name: "name1", status: PASSED,
-                suite: new AllureTestSuiteInfo(uid: "suiteUid1", name: "suiteName1"),
+                suite: "suiteName1",
                 time: new Time(start: 3, stop: 10)
         )
 
         def testCase2 = new AllureTestCase(uid: "uid2", name: "name2", status: FAILED,
-                suite: new AllureTestSuiteInfo(uid: "suiteUid1", name: "suiteName1"),
+                suite: "suiteName1",
                 time: new Time(start: 2, stop: 9)
         )
 
         def testCase3 = new AllureTestCase(uid: "uid3", name: "name3", status: BROKEN,
-                suite: new AllureTestSuiteInfo(uid: "suiteUid2", name: "suiteName2"),
+                suite: "suiteName2",
                 time: new Time(start: 7, stop: 15)
         )
 
@@ -105,7 +97,7 @@ class XUnitPluginTest {
         assert plugin.xUnit.testSuites.collect { it.name }.containsAll(["suiteName1", "suiteName2"])
 
         def suite1 = plugin.xUnit.testSuites[0]
-        assert suite1.uid == "suiteUid1"
+        assert suite1.uid
         assert suite1.name == "suiteName1"
 
         assert suite1.time
@@ -121,7 +113,7 @@ class XUnitPluginTest {
         assert suite1.testCases.collect { it.name }.containsAll(["name1", "name2"])
 
         def suite2 = plugin.xUnit.testSuites[1]
-        assert suite2.uid == "suiteUid2"
+        assert suite2.uid
         assert suite2.name == "suiteName2"
 
         assert suite2.time
@@ -162,7 +154,7 @@ class XUnitPluginTest {
             def testCase = new AllureTestCase(
                     time: new Time(start: 0, stop: i, duration: i),
                     status: FAILED,
-                    suite: new AllureTestSuiteInfo(uid: "$i", title: "suite#$i")
+                    suite: "suite#$i"
             )
             plugin.process(testCase)
         }
