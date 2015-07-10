@@ -18,7 +18,19 @@ public interface WithLabels {
 
     List<Label> getLabels();
 
-    default String getSuite() {
+    default List<String> getGroups() {
+        return getLabelValues(LabelName.GROUP);
+    }
+
+    default String getMethodName() {
+        return getLabelValue(LabelName.METHOD);
+    }
+
+    default String getClassName() {
+        return getLabelValue(LabelName.CLASS);
+    }
+
+    default String getSuiteName() {
         return getLabelValue(LabelName.SUITE);
     }
 

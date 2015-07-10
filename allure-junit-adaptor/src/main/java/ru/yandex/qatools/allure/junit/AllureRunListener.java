@@ -7,7 +7,6 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 import ru.yandex.qatools.allure.Allure;
-import ru.yandex.qatools.allure.config.AllureModelUtils;
 import ru.yandex.qatools.allure.events.ClearStepStorageEvent;
 import ru.yandex.qatools.allure.events.TestCaseCanceledEvent;
 import ru.yandex.qatools.allure.events.TestCaseFailureEvent;
@@ -16,11 +15,15 @@ import ru.yandex.qatools.allure.events.TestCasePendingEvent;
 import ru.yandex.qatools.allure.events.TestCaseStartedEvent;
 import ru.yandex.qatools.allure.events.TestSuiteFinishedEvent;
 import ru.yandex.qatools.allure.events.TestSuiteStartedEvent;
+import ru.yandex.qatools.allure.model.LabelName;
 import ru.yandex.qatools.allure.utils.AnnotationManager;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import static ru.yandex.qatools.allure.config.AllureModelUtils.createLabel;
+import static ru.yandex.qatools.allure.config.AllureModelUtils.createTestFrameworkLabel;
 
 /**
  * @author Dmitry Baev charlie@yandex-team.ru
@@ -28,6 +31,7 @@ import java.util.UUID;
  */
 public class AllureRunListener extends RunListener {
 
+    public static final String JUNIT = "JUnit";
     private Allure lifecycle = Allure.LIFECYCLE;
 
     private final Map<String, String> suites = new HashMap<>();
@@ -40,7 +44,10 @@ public class AllureRunListener extends RunListener {
 
         am.update(event);
 
-        event.withLabels(AllureModelUtils.createTestFrameworkLabel("JUnit"));
+        event.withLabels(
+                createTestFrameworkLabel(JUNIT),
+                createLabel(LabelName.CLASS, description.getClassName())
+        );
 
         getLifecycle().fire(event);
     }
@@ -51,6 +58,10 @@ public class AllureRunListener extends RunListener {
         AnnotationManager am = new AnnotationManager(description.getAnnotations());
 
         am.update(event);
+
+        event.withLabels(
+                createLabel(LabelName.METHOD, description.getMethodName())
+        );
 
         fireClearStepStorage();
         getLifecycle().fire(event);

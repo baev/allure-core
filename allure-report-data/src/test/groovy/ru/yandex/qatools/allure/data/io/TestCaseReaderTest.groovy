@@ -2,7 +2,6 @@ package ru.yandex.qatools.allure.data.io
 
 import org.junit.Ignore
 import org.junit.Test
-import ru.yandex.qatools.allure.data.utils.PluginUtils
 import ru.yandex.qatools.allure.model.Description
 import ru.yandex.qatools.allure.model.DescriptionType
 import ru.yandex.qatools.allure.model.Label
@@ -95,7 +94,7 @@ class TestCaseReaderTest {
 
         def next = reader.iterator().next()
         assert next
-        assert next.suite == "name"
+        assert next.suiteName == "name"
         assert next.labels.contains(label)
     }
 

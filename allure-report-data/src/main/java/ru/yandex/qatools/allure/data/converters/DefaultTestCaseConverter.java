@@ -65,7 +65,7 @@ public class DefaultTestCaseConverter implements TestCaseConverter {
             result.setTestId(source.getTestId());
             result.setSeverity(Optional.ofNullable(source.getSeverity()).orElse(SeverityLevel.NORMAL));
             result.setSummary(source.getSummary());
-            result.setSuite(Optional.ofNullable(source.getSuite()).orElse(UNKNOWN_TEST_SUITE));
+            result.setSuite(Optional.ofNullable(source.getSuiteName()).orElse(UNKNOWN_TEST_SUITE));
 
             return result;
         }
