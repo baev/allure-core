@@ -28,6 +28,11 @@ public class AllureMain {
     public static final Pattern REPORT_RESOURCE_PATTERN =
             Pattern.compile("^allure\\.report\\.face/(.+)$");
 
+    /**
+     * No need to instance this class.
+     */
+    AllureMain() {
+    }
 
     public static void main(String[] args) throws IOException {
         if (args.length < 2) { // NOSONAR
