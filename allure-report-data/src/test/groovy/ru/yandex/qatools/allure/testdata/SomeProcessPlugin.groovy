@@ -1,6 +1,6 @@
 package ru.yandex.qatools.allure.testdata
 
-import ru.yandex.qatools.allure.plugins.PluginData
+import ru.yandex.qatools.allure.plugins.PluginDataObject
 import ru.yandex.qatools.allure.plugins.WithData
 import ru.yandex.qatools.allure.plugins.ProcessPlugin
 
@@ -14,7 +14,7 @@ class SomeProcessPlugin implements ProcessPlugin, WithData {
     }
 
     @Override
-    List<PluginData> getPluginData() {
+    List<PluginDataObject> getPluginData() {
         return null
     }
 

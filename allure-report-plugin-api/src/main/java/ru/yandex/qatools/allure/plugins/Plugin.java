@@ -1,9 +1,7 @@
 package ru.yandex.qatools.allure.plugins;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import static ru.yandex.qatools.allure.plugins.PluginUtils.checkFieldsWithAnnotationCount;
+import static ru.yandex.qatools.allure.plugins.PluginUtils.checkModifiers;
 
 /**
  * Main interface for all Allure report plugins.
@@ -14,35 +12,28 @@ import java.lang.annotation.Target;
 public interface Plugin {
 
     /**
-     * Using this annotation you can specify the plugin name. This annotation
-     * is required for all plugins. Plugin name should contains only latin characters
-     * or numbers (but can't start with number).
+     * Name for plugin. Name should be unique and contains only latin characters.
      */
-    @Target({ElementType.TYPE})
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface Name {
-
-        String value();
+    default String getName() {
+        return getClass().isAnnotationPresent(PluginName.class) ?
+                getClass().getAnnotation(PluginName.class).value() : null;
     }
 
     /**
-     * Using this annotation you can specify plugin priority. Plugins with higher
-     * priority will be processed first.
+     * Returns the priority of the plugin.
      */
-    @Target({ElementType.TYPE})
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface Priority {
-
-        int value();
+    default int getPriority() {
+        return getClass().isAnnotationPresent(PluginPriority.class) ?
+                getClass().getAnnotation(PluginPriority.class).value() : 0;
     }
 
     /**
-     * This annotation helps you to specify fields with data for plugin.
+     * Returns true if plugin is valid, false otherwise.
      */
-    @Target({ElementType.FIELD})
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface Data {
-
-        String value() default "##default";
+    default boolean isValid() {
+        return getClass().isAnnotationPresent(PluginName.class)
+                && checkModifiers(getClass())
+                && checkFieldsWithAnnotationCount(getClass(), PluginData.class)
+                && checkFieldsWithAnnotationCount(getClass(), WidgetData.class);
     }
 }

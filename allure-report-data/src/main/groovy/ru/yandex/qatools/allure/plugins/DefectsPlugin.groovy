@@ -16,13 +16,13 @@ import static ru.yandex.qatools.allure.model.Status.FAILED
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 06.02.15
  */
-@Plugin.Name("defects")
-@Plugin.Priority(600)
+@PluginName("defects")
+@PluginPriority(600)
 class DefectsPlugin extends DefaultTabPlugin implements WithWidget {
 
     public static final int DEFECTS_IN_WIDGET = 10
 
-    @Plugin.Data
+    @PluginData
     def defects = new AllureDefects(defectsList: [
             new AllureDefect(title: "Product defects", status: FAILED),
             new AllureDefect(title: "Test defects", status: BROKEN)

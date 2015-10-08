@@ -7,9 +7,9 @@ import ru.yandex.qatools.allure.KeyValueWidgetItem
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 18.02.15
  */
-@Plugin.Name("environment")
-@Plugin.Priority(100)
-class EnvironmentPlugin extends AbstractPlugin implements WithWidget {
+@PluginName("environment")
+@PluginPriority(100)
+class EnvironmentPlugin implements WithWidget {
 
     @Inject
     Environment environment

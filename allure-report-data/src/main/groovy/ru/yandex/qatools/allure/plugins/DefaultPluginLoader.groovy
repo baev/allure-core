@@ -35,20 +35,11 @@ class DefaultPluginLoader implements PluginLoader {
         def loaded = ServiceLoaderUtils.load(pluginClassLoader, Plugin.class) ?: [] as List<Plugin>
 
         loaded.each {
-            if (isValidPlugin(it)) {
+            if (it.valid) {
                 injector?.injectMembers(it)
                 result.add(it)
             }
         }
         result
-    }
-
-    /**
-     * Some checks for plugins.
-     * @see AbstractPlugin#isValid(java.lang.Class)
-     */
-    protected static boolean isValidPlugin(Plugin plugin) {
-        return plugin && (plugin instanceof AbstractPlugin ?
-                AbstractPlugin.isValid(plugin.class) : true)
     }
 }

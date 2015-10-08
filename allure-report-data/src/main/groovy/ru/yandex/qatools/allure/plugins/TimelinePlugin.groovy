@@ -11,11 +11,11 @@ import ru.yandex.qatools.allure.utils.PluginUtils
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 07.02.15
  */
-@Plugin.Name("timeline")
-@Plugin.Priority(200)
+@PluginName("timeline")
+@PluginPriority(200)
 class TimelinePlugin extends DefaultTabPlugin {
 
-    @Plugin.Data
+    @PluginData
     def timeline = new AllureTimeline()
 
     private Map<String, Host> hosts = [:]

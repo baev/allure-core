@@ -32,7 +32,7 @@ public interface PluginsIndex {
     <T> List<T> findAll(Class<T> type);
 
     /**
-     * Find plugin by name. See {@link Plugin.Name}
+     * Find plugin by name. See {@link PluginName}
      * Returns null if there is no such plugin.
      *
      * @param name the given name of plugin to find.

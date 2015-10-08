@@ -8,11 +8,11 @@ import ru.yandex.qatools.allure.utils.PluginUtils
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 06.02.15
  */
-@Plugin.Name("graph")
-@Plugin.Priority(300)
+@PluginName("graph")
+@PluginPriority(300)
 class GraphPlugin extends DefaultTabPlugin {
 
-    @Plugin.Data
+    @PluginData
     AllureGraph graph = new AllureGraph();
 
     @Override

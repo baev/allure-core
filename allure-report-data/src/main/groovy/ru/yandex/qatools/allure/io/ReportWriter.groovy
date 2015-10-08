@@ -10,7 +10,8 @@ import ru.yandex.qatools.allure.AllureTestCase
 import ru.yandex.qatools.allure.AttachmentInfo
 import ru.yandex.qatools.allure.ReportGenerationException
 import ru.yandex.qatools.allure.plugins.Environment
-import ru.yandex.qatools.allure.plugins.PluginData
+import ru.yandex.qatools.allure.plugins.PluginDataObject
+import ru.yandex.qatools.allure.plugins.WithResources
 
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
@@ -62,7 +63,7 @@ class ReportWriter {
         serializeToData(testCase.uid + TESTCASE_SUFFIX, testCase);
     }
 
-    void write(PluginData data) {
+    void write(PluginDataObject data) {
         Objects.requireNonNull(data)
         serializeToData(data.name, data.data);
     }
@@ -79,8 +80,15 @@ class ReportWriter {
         }
     }
 
+
     void write(String pluginName, URL resource) {
         copyResource(pluginName, resource)
+    }
+
+    void write(String pluginName, List<URL> resources) {
+        resources.each {
+            write(pluginName, it)
+        }
     }
 
     void writeIndexHtml(List<String> plugins) {

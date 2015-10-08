@@ -1,7 +1,6 @@
 package ru.yandex.qatools.allure.plugins
 
 import com.google.common.hash.Hashing
-import com.google.common.reflect.ClassPath
 import com.google.inject.Inject
 import groovy.transform.CompileStatic
 import ru.yandex.qatools.allure.Widgets
@@ -52,17 +51,19 @@ class PluginManager {
     /**
      * Get list of names of plugins with resources.
      */
+    @Deprecated
     List<String> getPluginsNames() {
         pluginsWithResources.collect { plugin ->
-            plugin.name
+            (plugin as Plugin).name
         }
     }
 
     /**
      * Get all data for plugins with data.
      */
-    List<PluginData> getPluginsData() {
-        pluginsWithData*.pluginData.flatten() as List<PluginData>
+    @Deprecated
+    List<Object> getPluginsData() {
+        pluginsWithData*.pluginData.flatten()
     }
 
     /**
@@ -91,7 +92,7 @@ class PluginManager {
      * @see ReportWriter
      */
     void writePluginList(ReportWriter writer) {
-        writer.write(new PluginData(PLUGINS_JSON, pluginsNames))
+        writer.write(new PluginDataObject(PLUGINS_JSON, pluginsNames))
     }
 
     /**
@@ -101,24 +102,22 @@ class PluginManager {
      */
     void writePluginWidgets(ReportWriter writer) {
         def Map<String, Object> widgetData = (Map) pluginsWithWidgets.inject([:]) { memo, widget ->
-            memo[widget.name] = widget.widgetData
+            memo[(widget as Plugin).name] = widget.widgetData
             return memo
         };
         def hash = Hashing.sha1().hashString(widgetData.keySet().join(""), StandardCharsets.UTF_8).toString()
-        writer.write(new PluginData(WIDGETS_JSON, new Widgets(hash: hash, plugins: widgetData)))
+        writer.write(new PluginDataObject(WIDGETS_JSON, new Widgets(hash: hash, plugins: widgetData)))
     }
 
     /**
      * Write plugin resources. For each plugin search resources using
-     * {@link #findPluginResources(WithResources)}
      *
      * @see ReportWriter
      */
     void writePluginResources(ReportWriter writer) {
         pluginsWithResources.each { plugin ->
-            def resources = findPluginResources(plugin)
-            resources.each { resource ->
-                writer.write(plugin.name, resource)
+            plugin.resources.each { resource ->
+                writer.write((plugin as Plugin).name, resource)
             }
         }
     }
@@ -130,20 +129,5 @@ class PluginManager {
      */
     void writePluginData(ReportWriter writer) {
         pluginsData.each { writer.write(it) }
-    }
-
-    /**
-     * Find all resources for plugin.
-     */
-    protected static List<URL> findPluginResources(WithResources plugin) {
-        def path = plugin.class.canonicalName.replace('.', '/')
-        def pattern = ~"^$path/.+\$"
-        def result = []
-        for (def resource : ClassPath.from(plugin.class.classLoader).resources) {
-            if (resource.resourceName =~ pattern) {
-                result.add(resource.url())
-            }
-        }
-        result
     }
 }

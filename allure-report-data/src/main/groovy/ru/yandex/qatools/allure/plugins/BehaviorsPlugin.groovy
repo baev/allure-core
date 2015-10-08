@@ -18,13 +18,13 @@ import static ru.yandex.qatools.allure.utils.TextUtils.generateUid
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 06.02.15
  */
-@Plugin.Name("behaviors")
-@Plugin.Priority(400)
+@PluginName("behaviors")
+@PluginPriority(400)
 class BehaviorsPlugin extends DefaultTabPlugin implements WithWidget {
 
     public static final int FEATURES_IN_WIDGET = 10
 
-    @Plugin.Data
+    @PluginData
     def behavior = new AllureBehavior();
 
     /**

@@ -6,10 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation helps you to specify fields with data for plugin.
+ * Using this annotation you can specify plugin priority. Plugins with higher
+ * priority will be processed first.
  */
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PluginData {
+public @interface PluginPriority {
 
+    int value();
 }

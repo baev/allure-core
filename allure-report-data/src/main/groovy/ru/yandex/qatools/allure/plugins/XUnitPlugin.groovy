@@ -13,11 +13,11 @@ import ru.yandex.qatools.allure.utils.PluginUtils
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 06.02.15
  */
-@Plugin.Name("xunit")
-@Plugin.Priority(500)
+@PluginName("xunit")
+@PluginPriority(500)
 class XUnitPlugin extends DefaultTabPlugin implements WithWidget {
 
-    @Plugin.Data
+    @PluginData
     def xUnit = new AllureXUnit(time: new Time(start: Long.MAX_VALUE, stop: Long.MIN_VALUE))
 
     private Map<String, AllureTestSuite> testSuites = [:]

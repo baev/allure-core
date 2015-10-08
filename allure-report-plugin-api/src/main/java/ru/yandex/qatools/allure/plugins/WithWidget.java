@@ -1,5 +1,9 @@
 package ru.yandex.qatools.allure.plugins;
 
+import java.lang.reflect.Field;
+
+import static ru.yandex.qatools.allure.plugins.PluginUtils.getFieldValue;
+
 /**
  * You can add widget to allure report. Widgets are shown at overview
  * tab in the report. There are few supported types of widgets:
@@ -9,21 +13,19 @@ package ru.yandex.qatools.allure.plugins;
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 22.04.15
  * @see ProcessPlugin
- * @see ru.yandex.qatools.allure.data.WidgetType
- * @see KeyValueWidget
- * @see StatsWidget
- * @see DefectsWidget
  */
-public interface WithWidget {
-
-    /**
-     * Name for plugin. Name should be unique and contains only latin characters.
-     */
-    String getName();
+public interface WithWidget extends Plugin {
 
     /**
      * Get plugin widget content. You must implement {@link ProcessPlugin} to collect
      * information from test results.
      */
-    Object getWidgetData();
+    default Object getWidgetData() {
+        for (Field field : getClass().getDeclaredFields()) {
+            if (field.isAnnotationPresent(WidgetData.class)) {
+                return getFieldValue(this, field);
+            }
+        }
+        return null;
+    }
 }

@@ -51,7 +51,7 @@ class PluginManagerTest {
         manager.prepare(new Object())
         manager.process(new ArrayList())
 
-        assert manager.pluginsData == [] as List<PluginData>
+        assert manager.pluginsData == [] as List<PluginDataObject>
     }
 
     @Test
@@ -127,7 +127,7 @@ class PluginManagerTest {
         def manager = createPluginManager([new SomeProcessPluginWithNullData()])
 
         manager.process(new SomeObject())
-        assert manager.pluginsData == [null] as List<PluginData>
+        assert manager.pluginsData == [null] as List<PluginDataObject>
     }
 
     @Test
@@ -225,7 +225,7 @@ class PluginManagerTest {
         }
 
         @Override
-        void write(PluginData data) {
+        void write(PluginDataObject data) {
             assert !writtenData.containsKey(data.name)
             writtenData.put(data.name, data.data)
         }
@@ -259,20 +259,14 @@ class PluginManagerTest {
         }
     }
 
-    class SomePluginWithHighPriority extends SomeProcessPlugin implements WithPriority {
+    @PluginPriority(100)
+    class SomePluginWithHighPriority extends SomeProcessPlugin {
 
-        @Override
-        int getPriority() {
-            return 100
-        }
     }
 
-    class SomePluginWithLowPriority extends SomeProcessPlugin implements WithPriority {
+    @PluginPriority(10)
+    class SomePluginWithLowPriority extends SomeProcessPlugin {
 
-        @Override
-        int getPriority() {
-            return 10
-        }
     }
 
     class SomeOtherProcessPlugin extends SomeProcessPlugin {
@@ -303,16 +297,16 @@ class PluginManagerTest {
 
     class SomeProcessPlugin extends SomePlugin implements ProcessPlugin<SomeObject>, WithData {
         def suffix = "_SUFFIX"
-        List<PluginData> pluginData = []
+        List<PluginDataObject> pluginData = []
 
         @Override
         void process(SomeObject data) {
             data.someValue += suffix
-            pluginData.add(new PluginData("name" + suffix, data))
+            pluginData.add(new PluginDataObject("name" + suffix, data))
         }
 
         @Override
-        List<PluginData> getPluginData() {
+        List<PluginDataObject> getPluginData() {
             return pluginData
         }
     }
@@ -325,7 +319,7 @@ class PluginManagerTest {
         }
 
         @Override
-        List<PluginData> getPluginData() {
+        List<PluginDataObject> getPluginData() {
             return null
         }
     }

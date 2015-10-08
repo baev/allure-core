@@ -55,14 +55,6 @@ class DefaultPluginsIndex implements PluginsIndex {
     }
 
     /**
-     * Get priority of given plugin.
-     * @see WithPriority
-     */
-    protected static int getPriority(Plugin plugin) {
-        plugin instanceof WithPriority ? (plugin as WithPriority).priority : 0
-    }
-
-    /**
      * Find all plugins with specified type.
      */
     protected static <T> List<T> filterByType(List<? extends Plugin> plugins, Class<T> type) {
@@ -76,7 +68,7 @@ class DefaultPluginsIndex implements PluginsIndex {
      */
     protected static Closure<Integer> getSortClosure() {
         { first, second ->
-            getPriority(second as Plugin) <=> getPriority(first as Plugin) ?:
+            (second as Plugin).priority <=> (first as Plugin).priority ?:
                     first.class.simpleName <=> second.class.simpleName
         }
     }

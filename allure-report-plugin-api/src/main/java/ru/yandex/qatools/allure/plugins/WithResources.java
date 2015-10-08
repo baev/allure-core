@@ -1,5 +1,8 @@
 package ru.yandex.qatools.allure.plugins;
 
+import java.net.URL;
+import java.util.List;
+
 /**
  * Common interface for all plugins with some resources. You can pass resources
  * to the report by adding it to class path to ${yourPluginCanonicalClassName} folder.
@@ -8,14 +11,17 @@ package ru.yandex.qatools.allure.plugins;
  *
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 22.04.15
- * @see AbstractPlugin
  */
-public interface WithResources {
+public interface WithResources extends Plugin {
 
     /**
-     * Name for plugin. Name should be unique and contains only latin characters.
+     * Return the resources for plugin.
      */
-    String getName();
-
+    default List<URL> getResources() {
+        return PluginUtils.findPluginResources(
+                getClass().getClassLoader(),
+                getClass().getCanonicalName()
+        );
+    }
 
 }
